@@ -24,10 +24,8 @@ struct Athlete // stuct za atleta
     float current_result;  // za poslednata extra zadacha
 };
 
-Athlete added_athletes_data[35];
-
 // funkcii za polzvane vuv maina
-void AddAthletes(int &current_count) // dobavqna na atleti i sledene na segashniq im broi v masiva
+void AddAthletes(Athlete added_athletes_data[], int &current_count) // dobavqna na atleti i sledene na segashniq im broi v masiva
 {
     Athlete new_athlete;
     if (max_total_athletes > current_count)
@@ -205,16 +203,13 @@ void Search_By_Country(Athlete added_athletes_data[], int current_count)
 void Sort_By_Alphabetical_Order(Athlete added_athletes_data[], int current_count)
 {
     int tempswap;
-    for (int i = 0; i < current_count - 1; i++)
+    for (int i = 0; i < current_count; i++)
     {
-        for (int j = 0; j << current_count - i - 1; j++)
+        for (int j = 0; j << current_count; j ++)
         {
-            if (added_athletes_data[j].discipline > added_athletes_data[j + 1].discipline)
-            {
-                added_athletes_data[i].discipline = tempswap;
-                added_athletes_data[i].discipline = added_athletes_data[j + 1].discipline;
-                added_athletes_data[j + 1].discipline = tempswap;
-            }
+            added_athletes_data[i].discipline = tempswap;
+            added_athletes_data[i].discipline = added_athletes_data[j].discipline;
+            added_athletes_data[j].discipline = tempswap;
         }
     }
 }
@@ -224,12 +219,12 @@ void Sort_By_Alphabetical_Order(Athlete added_athletes_data[], int current_count
 //podmenu dopulnitelna podtocka - case 4
 void Submenu()
 {
-    
+
 }
 
 //izvejdane na sportisti po disciplini podredeni po nai dobriq si godishen rezultat
 //BYR = best year result
-void Sort_Athletes_By_BYR
+void Sort_Athletes_By_BYR 
 
 //Търсене и извеждане на спортистите до въведена възраст подредени по име;
 void Search_Till_Age()
@@ -247,13 +242,12 @@ void DisplayMenu()
 {
     cout << "World Athletics Championship Information System \n";
     cout << "1. Add Athletes \n";
-    cout << "2. Alphabetically sort all the ahtletes based on the sport they play \n";
-    cout << "3. Display all available athletes \n";
-    cout << "4. Search for athletes by their country \n";
-    cout << "5. Extra athlete information \n";
-    cout << "6. Ongoing tournament \n";
-    cout << "7. Save to File \n";
-    cout << "8. Exit the program \n";
+    cout << "2. Display all available athletes \n";
+    cout << "3. Search for athletes by their country \n";
+    cout << "4. Extra athlete information \n";
+    cout << "5. Ongoing tournament \n";
+    cout << "6. Save to File \n";
+    cout << "7. Exit the program \n";
 }
 
 void CloseProgram()
@@ -299,27 +293,26 @@ int main()
             if (n < max_total_athletes)
                 for (int i = 0; i < n; i++)
                 {
-                    AddAthletes(current_count);
+                    AddAthletes(athletes, current_count);
                 }
             break;
         }
 
         case 2:
         {
-            Sort_By_Alphabetical_Order(added_athletes_data, current_count);
+            DisplayAthletes(athletes, current_count);
+            Most_Participations(athletes, current_count);
             break;
         }
 
         case 3:
         {
-            DisplayAthletes(added_athletes_data, current_count);
-            Most_Participations(added_athletes_data, current_count);
+            Search_By_Country(athletes, current_count);
             break;
         }
 
         case 4:
         {
-            Search_By_Country(added_athletes_data, current_count);
             break;
         }
 
@@ -334,14 +327,9 @@ int main()
         }
 
         case 7:
-        {
-            break;
-        }
-
-        case 8:
             CloseProgram();
             break;
         }
-    } while (user_choice != 8);
+    } while (user_choice != 7);
     return 0;
 }
